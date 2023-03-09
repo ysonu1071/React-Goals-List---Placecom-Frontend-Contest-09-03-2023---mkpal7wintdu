@@ -1,11 +1,22 @@
 import React, { useState } from "react";
 
-const GoalForm = () => {
+const GoalForm = ({getGoal}) => {
     const [formData, setFormData] = useState({
       goal: "",
       by: ""
     });
   
+    const handleInput = (e) => {
+      let name = e.target.name;
+      let value = e.target.value;
+
+      setFormData({...formData,[name]:value});
+    }
+
+    const handleAdd = (e) => {
+      e.preventDefault();
+      getGoal(formData);
+    }
     return (
       <>
         <h1>My Goals</h1>
@@ -13,14 +24,18 @@ const GoalForm = () => {
           <input 
             type="text" 
             name='goal' 
-            placeholder='Goal...' 
+            placeholder='Goal...'
+            value={formData.goal}
+            onChange={handleInput} 
           />
           <input 
             type="text"
             name="by"
             placeholder='By...'
+            value={formData.by}
+            onChange={handleInput} 
           />
-          <button>Add</button>
+          <button onClick={handleAdd}>Add</button>
         </form>
       </>
     )
