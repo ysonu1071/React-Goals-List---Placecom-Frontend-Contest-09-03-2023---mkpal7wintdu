@@ -16,6 +16,10 @@ const GoalForm = ({getGoal}) => {
     const handleAdd = (e) => {
       e.preventDefault();
       getGoal(formData);
+      setFormData({
+        goal: "",
+        by: ""
+      })
     }
     return (
       <>
